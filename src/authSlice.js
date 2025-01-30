@@ -1,23 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { useCookies } from "react-cookie";
+import { createSlice } from '@reduxjs/toolkit'
+import { useCookies } from 'react-cookie'
 
-const cookie = new useCookies();
+const cookie = new useCookies()
 
 const initialState = {
-  isSignIn: cookie.get("token") !== undefined,
-};
+  isSignIn: cookie.get('token') !== undefined,
+}
 
 export const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     signIn: (state) => {
-      state.isSignIn = true;
+      state.isSignIn = true
     },
     signOut: (state) => {
-      state.isSignIn = false;
+      state.isSignIn = false
     },
   },
-});
+})
 
-export const { signIn, signOut } = authSlice.actions;
+export const { signIn, signOut } = authSlice.actions
