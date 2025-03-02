@@ -27,7 +27,7 @@ export const Home = () => {
       .catch((err) => {
         setErrorMessage(`リストの取得に失敗しました。${err}`)
       })
-  }, [])
+  }, [cookies.token])
 
   useEffect(() => {
     const listId = lists[0]?.id
@@ -46,7 +46,7 @@ export const Home = () => {
           setErrorMessage(`タスクの取得に失敗しました。${err}`)
         })
     }
-  }, [lists])
+  }, [cookies.token, lists])
 
   const handleSelectList = (id) => {
     setSelectListId(id)
@@ -127,7 +127,7 @@ const Tasks = (props) => {
   const { tasks, selectListId, isDoneDisplay } = props
   if (tasks === null) return <></>
 
-  if (isDoneDisplay == 'done') {
+  if (isDoneDisplay === 'done') {
     return (
       <ul>
         {tasks
