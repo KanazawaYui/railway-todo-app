@@ -23,6 +23,7 @@
     "globals": "^16.0.0",
     "prettier": "3.5.2",
     "react-scripts": "5.0.1",
+    "sass": "^1.85.1",
     "typescript-eslint": "^8.25.0"
   },
   "scripts": {
