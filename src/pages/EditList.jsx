@@ -61,7 +61,7 @@ export const EditList = () => {
       .catch((err) => {
         setErrorMessage(`リスト情報の取得に失敗しました。${err}`);
       });
-  }, []);
+  }, [cookies.token, listId]);
 
   return (
     <div>
