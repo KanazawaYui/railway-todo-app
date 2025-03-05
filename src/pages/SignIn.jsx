@@ -11,11 +11,11 @@ import { url } from '../const'
 export const SignIn = () => {
   const auth = useSelector((state) => state.auth.isSignIn)
   const dispatch = useDispatch()
-  const history = useNavigate()
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState()
-  const [setCookie] = useCookies()
+  const [, setCookie] = useCookies()
   const handleEmailChange = (e) => setEmail(e.target.value)
   const handlePasswordChange = (e) => setPassword(e.target.value)
   const onSignIn = () => {
@@ -24,7 +24,7 @@ export const SignIn = () => {
       .then((res) => {
         setCookie('token', res.data.token)
         dispatch(signIn())
-        history.push('/')
+        navigate('/')
       })
       .catch((err) => {
         setErrorMessage(`サインインに失敗しました。${err}`)
