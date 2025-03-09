@@ -16,7 +16,7 @@ export const NewTask = () => {
   const [cookies] = useCookies()
   const navigate = useNavigate()
   const handleTitleChange = (e) => setTitle(e.target.value)
-  const handleLimitChange = (e) => setLimit(e.target.value)
+  const handleLimitChange = (e) => setLimit(e.target.value + ':00Z')
   const handleDetailChange = (e) => setDetail(e.target.value)
   const handleSelectList = (id) => setSelectListId(id)
   const onCreateTask = () => {

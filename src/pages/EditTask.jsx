@@ -16,7 +16,7 @@ export const EditTask = () => {
   const [isDone, setIsDone] = useState()
   const [errorMessage, setErrorMessage] = useState('')
   const handleTitleChange = (e) => setTitle(e.target.value)
-  const handleLimitChange = (e) => setLimit(e.target.value)
+  const handleLimitChange = (e) => setLimit(e.target.value + ':00Z')
   const handleDetailChange = (e) => setDetail(e.target.value)
   const handleIsDoneChange = (e) => setIsDone(e.target.value === 'done')
   const onUpdateTask = () => {
