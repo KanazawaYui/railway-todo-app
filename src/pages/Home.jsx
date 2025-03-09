@@ -141,6 +141,7 @@ const Tasks = (props) => {
                 className="task-item-link"
               >
                 {task.title}
+                {task.limit ? task.limit : ''}
                 <br />
                 {task.done ? '完了' : '未完了'}
               </Link>
@@ -163,6 +164,8 @@ const Tasks = (props) => {
               className="task-item-link"
             >
               {task.title}
+              <br />
+              {task.limit ? task.limit : ''}
               <br />
               {task.done ? '完了' : '未完了'}
             </Link>
