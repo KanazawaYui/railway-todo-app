@@ -158,7 +158,10 @@ const Tasks = (props) => {
                   className="task-item-link"
                 >
                   {task.title}
-                  {task.limit ? task.limit : ''}
+                  期限：
+                  {task.limit
+                    ? new Date(task.limit).toLocaleDateString('ja-JP')
+                    : 'なし'}
                   {remainingTime && (
                     <>
                       （残り：
@@ -196,7 +199,7 @@ const Tasks = (props) => {
                 期限：
                 {task.limit
                   ? new Date(task.limit).toLocaleDateString('ja-JP')
-                  : ''}
+                  : 'なし'}
                 {remainingTime && (
                   <>
                     （残り：
