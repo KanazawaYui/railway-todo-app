@@ -122,7 +122,7 @@ export const Home = () => {
   )
 }
 
-const getLastTime = (limit) => {
+const getRemainingTime = (limit) => {
   const totalLimits = Date.parse(limit) - Date.now()
 
   if (totalLimits < 0) {
@@ -150,7 +150,7 @@ const Tasks = (props) => {
             return task.done === true
           })
           .map((task, key) => {
-            const lastTime = getLastTime(task.limit)
+            const remainingTime = getRemainingTime(task.limit)
             return (
               <li key={key} className="task-item">
                 <Link
@@ -159,14 +159,14 @@ const Tasks = (props) => {
                 >
                   {task.title}
                   {task.limit ? task.limit : ''}
-                  {lastTime && (
+                  {remainingTime && (
                     <>
                       （残り：
-                      {lastTime.days}日 {lastTime.hours}時間 {lastTime.minutes}
-                      分 {lastTime.seconds}秒）
+                      {remainingTime.days}日 {remainingTime.hours}時間{' '}
+                      {remainingTime.minutes}分 {remainingTime.seconds}秒）
                     </>
                   )}
-                  {!lastTime && <> 期限切れ</>}
+                  {!remainingTime && <> 期限切れ</>}
                   <br />
                   {task.done ? '完了' : '未完了'}
                 </Link>
@@ -184,7 +184,7 @@ const Tasks = (props) => {
           return task.done === false
         })
         .map((task, key) => {
-          const lastTime = getLastTime(task.limit)
+          const remainingTime = getRemainingTime(task.limit)
           return (
             <li key={key} className="task-item">
               <Link
@@ -197,14 +197,14 @@ const Tasks = (props) => {
                 {task.limit
                   ? new Date(task.limit).toLocaleDateString('ja-JP')
                   : ''}
-                {lastTime && (
+                {remainingTime && (
                   <>
                     （残り：
-                    {lastTime.days}日 {lastTime.hours}時間 {lastTime.minutes}分{' '}
-                    {lastTime.seconds}秒）
+                    {remainingTime.days}日 {remainingTime.hours}時間{' '}
+                    {remainingTime.minutes}分 {remainingTime.seconds}秒）
                   </>
                 )}
-                {!lastTime && <> 期限切れ</>}
+                {!remainingTime && <> 期限切れ</>}
                 <br />
                 {task.done ? '完了' : '未完了'}
               </Link>
