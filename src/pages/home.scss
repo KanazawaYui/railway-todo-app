@@ -17,6 +17,10 @@
   list-style: none;
   display: flex;
   overflow-x: auto;
+
+  :focus {
+    border: 2px solid #f00d0d;
+  }
 }
 
 .list-tab-item {
