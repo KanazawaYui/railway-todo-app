@@ -48,7 +48,6 @@ export const Home = () => {
     }
   }, [cookies.token, lists])
 
-  // 🔹リストを選択する関数（Enter / Space にも対応）
   const handleSelectList = (id) => {
     setSelectListId(id)
     axios
