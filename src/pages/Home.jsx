@@ -84,11 +84,7 @@ export const Home = () => {
             </div>
           </div>
 
-          <div
-            className="list-tab"
-            role="tablist"
-            aria-label="リストの切り替え"
-          >
+          <div className="list-tab" role="tablist">
             {lists.map((list) => {
               const isActive = list.id === selectListId
               return (
