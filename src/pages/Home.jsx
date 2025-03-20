@@ -122,6 +122,21 @@ export const Home = () => {
   )
 }
 
+const getRemainingTime = (limit) => {
+  const totalLimits = Date.parse(limit) - Date.now()
+
+  if (totalLimits < 0) {
+    return null
+  }
+
+  return {
+    days: Math.floor(totalLimits / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((totalLimits % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+    minutes: Math.floor((totalLimits % (1000 * 60 * 60)) / (1000 * 60)),
+    seconds: Math.floor((totalLimits % (1000 * 60)) / 1000),
+  }
+}
+
 // 表示するタスク
 const Tasks = (props) => {
   const { tasks, selectListId, isDoneDisplay } = props
@@ -134,18 +149,33 @@ const Tasks = (props) => {
           .filter((task) => {
             return task.done === true
           })
-          .map((task, key) => (
-            <li key={key} className="task-item">
-              <Link
-                to={`/lists/${selectListId}/tasks/${task.id}`}
-                className="task-item-link"
-              >
-                {task.title}
-                <br />
-                {task.done ? '完了' : '未完了'}
-              </Link>
-            </li>
-          ))}
+          .map((task, key) => {
+            const remainingTime = getRemainingTime(task.limit)
+            return (
+              <li key={key} className="task-item">
+                <Link
+                  to={`/lists/${selectListId}/tasks/${task.id}`}
+                  className="task-item-link"
+                >
+                  {task.title}
+                  期限：
+                  {task.limit
+                    ? new Date(task.limit).toLocaleDateString('ja-JP')
+                    : 'なし'}
+                  {remainingTime && (
+                    <>
+                      （残り：
+                      {remainingTime.days}日 {remainingTime.hours}時間{' '}
+                      {remainingTime.minutes}分 {remainingTime.seconds}秒）
+                    </>
+                  )}
+                  {!remainingTime && <> 期限切れ</>}
+                  <br />
+                  {task.done ? '完了' : '未完了'}
+                </Link>
+              </li>
+            )
+          })}
       </ul>
     )
   }
@@ -156,18 +186,34 @@ const Tasks = (props) => {
         .filter((task) => {
           return task.done === false
         })
-        .map((task, key) => (
-          <li key={key} className="task-item">
-            <Link
-              to={`/lists/${selectListId}/tasks/${task.id}`}
-              className="task-item-link"
-            >
-              {task.title}
-              <br />
-              {task.done ? '完了' : '未完了'}
-            </Link>
-          </li>
-        ))}
+        .map((task, key) => {
+          const remainingTime = getRemainingTime(task.limit)
+          return (
+            <li key={key} className="task-item">
+              <Link
+                to={`/lists/${selectListId}/tasks/${task.id}`}
+                className="task-item-link"
+              >
+                {task.title}
+                <br />
+                期限：
+                {task.limit
+                  ? new Date(task.limit).toLocaleDateString('ja-JP')
+                  : 'なし'}
+                {remainingTime && (
+                  <>
+                    （残り：
+                    {remainingTime.days}日 {remainingTime.hours}時間{' '}
+                    {remainingTime.minutes}分 {remainingTime.seconds}秒）
+                  </>
+                )}
+                {!remainingTime && <> 期限切れ</>}
+                <br />
+                {task.done ? '完了' : '未完了'}
+              </Link>
+            </li>
+          )
+        })}
     </ul>
   )
 }
