@@ -63,6 +63,7 @@ export const Home = () => {
         setErrorMessage(`タスクの取得に失敗しました。${err}`)
       })
   }
+
   return (
     <div>
       <Header />
@@ -82,20 +83,30 @@ export const Home = () => {
               </p>
             </div>
           </div>
-          <ul className="list-tab">
-            {lists.map((list, key) => {
+
+          <div className="list-tab" role="tablist">
+            {lists.map((list) => {
               const isActive = list.id === selectListId
               return (
-                <li
-                  key={key}
+                <button
+                  key={list.id}
                   className={`list-tab-item ${isActive ? 'active' : ''}`}
+                  role="tab"
+                  aria-selected={list.id === selectListId}
+                  tabIndex="0"
                   onClick={() => handleSelectList(list.id)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      handleSelectList(list.id)
+                    }
+                  }}
                 >
                   {list.title}
-                </li>
+                </button>
               )
             })}
-          </ul>
+          </div>
+
           <div className="tasks">
             <div className="tasks-header">
               <h2>タスク一覧</h2>
